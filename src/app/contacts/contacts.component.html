@@ -3,10 +3,14 @@
         <mat-icon>add</mat-icon>
     </button>
 </div>
-<ag-grid-angular
+
+<button class="btn btn-primary mb-3" (click)="onDeleteRow()">Delete Row</button>
+<ag-grid-angular #agGrid id="agGrid"
     style="width: 1000px; height: 500px;"
     class="ag-theme-alpine"
     [rowData]="contactsList"
     [columnDefs]="columnDefs"
+    rowSelection="multiple" 
+    (gridReady)="onGridReady($event)"
 >
 </ag-grid-angular>

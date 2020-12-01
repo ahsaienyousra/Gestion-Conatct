@@ -1,28 +1,61 @@
-<form class="example-form" [formGroup]="contactForm">
-    <mat-form-field class="example-full-width">
-      <mat-label>Nom</mat-label>
-      <input matInput formControlName="Nom">
-      <mat-error *ngIf="contactForm.get('Nom')?.errors?.error"> {{ contactForm.get('Nom')?.errors?.error }}</mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <mat-label>Prenom</mat-label>
-      <input matInput formControlName="Prenom">
-      <mat-error *ngIf="contactForm.get('Prenom')?.errors?.error"> {{ contactForm.get('Prenom')?.errors?.error }}</mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <mat-label>Date de naissance</mat-label>
-      <input matInput formControlName="datenaissance">
-      <mat-error *ngIf="contactForm.get('datenaissance')?.errors?.error"> {{ contactForm.get('datenaissance')?.errors?.error }}</mat-error>
-    </mat-form-field>
+<p>add works!</p>
+<form [formGroup]="contactForm">
   
+    <label>
+      Nom:
+      <input type="text" formControlName="nom">
+    </label>
+  
+    <label>
+      Prenom:
+      <input type="text" formControlName="prenom">
+    </label>
+    <label>
+        date de naissance:
+        <input type="text" formControlName="datenaissance">
+      </label>
+    <div formGroupName="address">
+        <h3>Address</h3>
+      
+        <label>
+            typeAdresse:
+          <input type="text" formControlName="typeAdresse">
+        </label>
+      
+        <label>
+            typeVoie:
+          <input type="text" formControlName="typeVoie">
+        </label>
+        
+        <label>
+            rue:
+          <input type="text" formControlName="rue">
+        </label>
+      
+        <label>
+            numero:
+          <input type="text" formControlName="numero">
+        </label>
+        <label>
+            ville:
+          <input type="text" formControlName="ville">
+        </label>
+        <label>
+            cp:
+          <input type="text" formControlName="cp">
+        </label>
+        <label>
+            pays:
+          <input type="text" formControlName="pays">
+        </label>
+        <label>
+            commentaire:
+          <input type="text" formControlName="pays">
+        </label>
+        <label>
+            contactNo:
+          <input type="text" formControlName="contactNo">
+        </label>
+      </div>
+      <button type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">Submit</button>
   </form>
-  
-  <button class="noOutlinebutton" mat-raised-button color="primary" [routerLink]="['/Dashboard']">
-    <mat-icon>keyboard_backspace</mat-icon>
-    </button> |
-    <button class="noOutlinebutton" mat-raised-button color="accent" [disabled]="contactForm.invalid" (click)="OnAddContact()">
-      <mat-icon>person_add</mat-icon>
-      Add Contact
-      </button>
