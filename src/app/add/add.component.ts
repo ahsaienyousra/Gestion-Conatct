@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { ContactService } from './../services/contact.service';
 import { Router } from '@angular/router';
 import { contactApp } from '../services/in-memory-data.service';
-import { noUndefined } from '@angular/compiler/src/util';
 import { Adresse } from '../Adresse';
+import {format} from "date-fns"
+
 
 @Component({
   selector: 'app-add',
@@ -124,9 +125,10 @@ export class AddComponent implements OnInit {
     }
     if (this.contactForm.invalid)
       return
-
+    let date = this.contactForm.controls.datenaissance.value;
+    date = format(date,"dd/MM/yyyy");
     let contact: contactApp = new contactApp(
-      this.contactForm.controls.nom.value, this.contactForm.controls.prenom.value,this.contactForm.controls.datenaissance.value, adressesLocal, undefined)
+      this.contactForm.controls.nom.value, this.contactForm.controls.prenom.value,date, adressesLocal, undefined)
 
     this.contactService.AddContact(contact).subscribe((response) => {
       this.router.navigate(["/contacts"])

@@ -19,20 +19,32 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { DataService } from './services/data.service';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import { MatNativeDateModule} from '@angular/material/core';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatSidenavModule} from '@angular/material/sidenav'
+import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatListModule} from '@angular/material/list'
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     AddComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    MatListModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,  
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatToolbarModule,
     HttpClientInMemoryWebApiModule.forRoot(
     InMemoryDataService, { dataEncapsulation: false }
     ),
@@ -43,7 +55,7 @@ import { DataService } from './services/data.service';
     MatInputModule,
     ReactiveFormsModule
   ],
-  providers: [DataService],
+  providers: [DataService,MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

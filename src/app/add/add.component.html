@@ -13,6 +13,13 @@
     date de naissance:
     <input type="text" formControlName="datenaissance" />
   </label>
+  <mat-form-field color="accent" appearance="fill">
+    <mat-label>Custom calendar color</mat-label>
+    <input matInput [matDatepicker]="picker2" formControlName="datenaissance">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+  </mat-form-field>
+  
   <h3>Address</h3>
   <table>
     <tr

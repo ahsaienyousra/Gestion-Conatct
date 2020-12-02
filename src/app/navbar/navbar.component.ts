@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class AppComponent {
-  title = 'Gestion Contact';
+export class NavbarComponent implements OnInit {
   isExpanded = false;
   element!: HTMLElement;
 
@@ -20,4 +19,9 @@ export class AppComponent {
     target.style.backgroundColor = "#e51282";
     this.element = target;
   }
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
 }
