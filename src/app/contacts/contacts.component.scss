@@ -10,7 +10,18 @@
 @import "@material/image-list/mdc-image-list";
 
 .contact-list {
-  @include mdc-image-list-standard-columns(4);
+  margin-left: 2em;
+  margin-top: 3em;
+}
 
-  overflow: auto;
+.actions{
+  margin-left:4.5em;
+}
+::ng-deep .mat-grid-list{
+  position: inherit !important;
+}
+.detail{
+
+  margin: auto ;
+  margin-right: 1em;
 }

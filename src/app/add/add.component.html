@@ -1,20 +1,21 @@
-<p>add works!</p>
+<div class="example-container">
+  <h1>Ajouter un nouveau contact</h1>
 <form [formGroup]="contactForm">
-  <label>
-    Nom:
-    <input type="text" formControlName="nom" />
-  </label>
+  <p>
+  <mat-form-field appearance="fill">
+    <mat-label>Nom:</mat-label>
+    <input matInput formControlName="nom" />
+  </mat-form-field>
 
-  <label>
-    Prenom:
-    <input type="text" formControlName="prenom" />
-  </label>
-  <label>
-    date de naissance:
-    <input type="text" formControlName="datenaissance" />
-  </label>
+  <mat-form-field appearance="fill">
+    <mat-label>Prenom:</mat-label>
+    <input matInput formControlName="prenom" />
+  </mat-form-field>
+</p>
+
+
   <mat-form-field color="accent" appearance="fill">
-    <mat-label>Custom calendar color</mat-label>
+    <mat-label>Date de Naissance:</mat-label>
     <input matInput [matDatepicker]="picker2" formControlName="datenaissance">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2 color="primary"></mat-datepicker>
@@ -31,26 +32,42 @@
     >
       <td>
         <div [formGroupName]="i">
-          <label>
-            typeAdresse:
-            <input type="text" formControlName="typeAdresse" />
-          </label>
-          <label>
-            typeVoie:
-            <input type="text" formControlName="typeVoie" />
-          </label>
-          <label>
-            rue:
-            <input type="text" formControlName="rue" />
-          </label>
-          <label>
-            numero:
-            <input type="text" formControlName="numero" />
-          </label>
-          <label>
-            ville:
-            <input type="text" formControlName="ville" />
-          </label>
+          <mat-form-field appearance="fill">
+            <mat-label>Type d'adresse:</mat-label>
+            <mat-select formControlName="typeAdresse">
+              <mat-option value="Domicile">Domicile</mat-option>
+              <mat-option value="Travail">Travail</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Numero:</mat-label>
+            <input matInput formControlName="numero" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Rue:</mat-label>
+            <input matInput formControlName="rue" />
+          </mat-form-field>
+         
+          <mat-form-field appearance="fill">
+            <mat-label>ville:</mat-label>
+            <input matInput formControlName="ville" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Code Postal:</mat-label>
+            <input matInput formControlName="cp" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Pays:</mat-label>
+            <input matInput formControlName="pays" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Commentaire:</mat-label>
+            <input matInput formControlName="commentaire" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Numero de telephone:</mat-label>
+            <input matInput formControlName="contactNo" />
+          </mat-form-field>
         </div>
       </td>
     </tr>
@@ -94,8 +111,9 @@
             contactNo:
           <input type="text" formControlName="contactNo">
         </label>-->
-  <button (click)="AddAdresse()">Add Adresse</button>
-  <button type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">
+  <button mat-raised-button color="accent"  (click)="AddAdresse()">Add Adresse</button>
+  <button mat-raised-button color="primary"  style="margin-left: 15px;" type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">
     Submit
   </button>
 </form>
+</div>

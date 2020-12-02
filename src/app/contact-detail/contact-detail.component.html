@@ -1,4 +1,24 @@
-<p>contact-detail works!</p>
-<div *ngFor="let d of mylist">
-    {{d.nom}}
-</div>
+<mat-card class="example-card">
+  <mat-card-header *ngIf="this.contact">
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{this.contact?.nom || ""}} {{this.contact?.prenom || ""}}</mat-card-title>
+    <mat-card-subtitle>{{this.contact?.datenaissance || ""}}</mat-card-subtitle>
+    <mat-card-subtitle>{{this.contact?.contactNo || ""}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image
+    src="https://superawesomevectors.com/wp-content/uploads/2017/10/person-outline-free-vector-icon-800x566.jpg"
+    alt="Contact">
+  <mat-card-content>
+    <div *ngIf="!this.contact">Selectionner un contact</div>
+    <div *ngIf="this.contact">
+      <div *ngFor="let d of this.contact.adresse">
+        <h4>{{d.typeAdresse}}</h4>
+        <h5>{{d.numero}}, {{d.rue}}, {{d.cp}}, {{d.ville}}, {{d.pays}}</h5>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="this.contact">
+    <button mat-button (click)="modifier()">Modifier</button>
+    <button mat-button (click)="delete()">Supprimer</button>
+  </mat-card-actions>
+</mat-card>

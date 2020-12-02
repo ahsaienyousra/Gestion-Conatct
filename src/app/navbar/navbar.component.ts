@@ -10,7 +10,6 @@ export class NavbarComponent implements OnInit {
   element!: HTMLElement;
 
   toggleActive(event:any){
-    debugger;
     event.preventDefault();
     if(this.element !== undefined){
       this.element.style.backgroundColor = "white";

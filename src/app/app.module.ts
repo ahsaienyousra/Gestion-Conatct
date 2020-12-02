@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
-
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {MatSidenavModule} from '@angular/material/sidenav'
 import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatListModule} from '@angular/material/list'
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import { ContactEditComponent } from './contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +35,13 @@ import {MatListModule} from '@angular/material/list'
     ContactsComponent,
     AddComponent,
     ContactDetailComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
     MatListModule,
+    MatSelectModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,  
@@ -45,6 +50,8 @@ import {MatListModule} from '@angular/material/list'
     MatNativeDateModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatGridListModule,
+    MatCardModule,
     HttpClientInMemoryWebApiModule.forRoot(
     InMemoryDataService, { dataEncapsulation: false }
     ),

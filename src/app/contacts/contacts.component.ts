@@ -15,12 +15,13 @@ export class ContactsComponent implements OnInit {
 
   private gridApi: any;
 
-  contactsList: any;
+  contactsList: any[]=[];
   value:any={};
   columnDefs = [
     { field: 'nom',  headerName:'Nom',sortable: true, filter: true, checkboxSelection: true },
-    { field: 'prenom', sortable: true, filter: true },
-    { field: 'datenaissance', sortable: true, filter: true }
+    { field: 'prenom', headerName:'Prenom',sortable: true, filter: true },
+    { field: 'datenaissance', headerName:'Date de Naissance',sortable: true, filter: true },
+    { field: 'contactNo', headerName:'Numéro Télé',sortable: true, filter: true }
   ];
   @ViewChild('agGrid')
   agGrid!: AgGridAngular;
@@ -29,19 +30,12 @@ export class ContactsComponent implements OnInit {
   constructor(private contactService: ContactService,private activateRoute: ActivatedRoute, private router: Router, private dataService:DataService) {
     this.dataService.currentData.subscribe(data =>{
       this.value = data;
+      this.getContacts()
     })
-    //this.contactService.mylist;
   }
 
   ngOnInit():void {
     this.getContacts();
-    
-  /*  let id = this.activateRoute.snapshot.params['id']
-    this.contactService.getContactById(id).subscribe((response)=>{
-      console.log(response) 
-      this.selectedContactDetails = response;
-    })
-  */
   }
   onGridReady(params: { api: any; }) {
     this.gridApi = params.api;
@@ -50,11 +44,25 @@ export class ContactsComponent implements OnInit {
     this.contactService.getContacts().subscribe((res: contactApp[])=>{
       console.log(res);
       this.contactsList=res;
+      this.refresh()
     });
   }
+
+  refresh(){
+    let list:any[]=this.contactsList;
+    for(let contact of list){
+      contact.contactNo = contact.adresse[0].contactNo
+    }
+    this.contactsList=list;
+  }
   onDeleteRow(){
-    var selectedData = this.gridApi.getSelectedRows();
-    var res = this.gridApi.applyTransaction({ remove: selectedData });
+    let selectedData = this.gridApi.getSelectedRows();
+    let res = this.gridApi.applyTransaction({ remove: selectedData });
+    for(let s of selectedData){
+      this.contactService.DeleteContact(s.id).subscribe((res:any)=>{
+        console.log(res)
+      })
+    }
     return(res);
   }
   getSelectedRowData(event?:any) {
@@ -62,5 +70,9 @@ export class ContactsComponent implements OnInit {
     this.dataService.changeData([selectedData])
     console.log(selectedData)
   } 
+
+  EditContact(event?:any){
+    this.router.navigate(["/edit/"+event.data.id])
+  }
  
 }

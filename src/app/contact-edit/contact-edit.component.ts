@@ -1,0 +1,164 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ContactService } from './../services/contact.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { contactApp } from '../services/in-memory-data.service';
+import { Adresse } from '../Adresse';
+import {format} from "date-fns"
+
+@Component({
+  selector: 'app-contact-edit',
+  templateUrl: './contact-edit.component.html',
+  styleUrls: ['./contact-edit.component.css']
+})
+export class ContactEditComponent implements OnInit {
+
+  contactForm!: FormGroup;
+  contact:any=[];
+   adressArray!: {
+     typeAdresse?: string;
+     typeVoie?: string;
+     rue?: string;
+     numero?: number;
+     ville?: string;
+     cp?: number;
+     pays?: string;
+     commentaire?: string;
+     contactNo?: string;
+   }[];
+ 
+ 
+ 
+   constructor(private builder: FormBuilder, private contactService: ContactService, private router: Router,private route:ActivatedRoute) {
+     this.contactService.getContactById(this.route.snapshot.params.id).subscribe((res:any)=>{
+       this.contact = res;
+       console.log(this.contact.nom)
+       this.contactForm.patchValue({
+        nom: this.contact.nom,
+        prenom: this.contact.prenom,
+        datenaissance:this.contact.datenaissance,
+       });
+       for(let ad of this.contact.adresse){
+        let address = {}
+        this.adressArray.push(address);
+        (this.contactForm.get("addresses") as FormArray).push(
+          this.builder.group({
+            typeAdresse: this.builder.control(ad.typeAdresse),
+            typeVoie: this.builder.control(ad.typeVoie),
+            rue: this.builder.control(ad.rue),
+            numero: this.builder.control(ad.numero),
+            ville: this.builder.control(ad.ville),
+            cp: this.builder.control(ad.cp),
+            pays: this.builder.control(ad.pays),
+            commentaire: this.builder.control(ad.commentaire),
+            contactNo: this.builder.control(ad.contactNo)
+          })
+        )
+       }
+     })
+     this.contactForm = builder.group({
+      nom: builder.control("",Validators.required),
+      prenom: builder.control("",Validators.required),
+      datenaissance: builder.control(""),
+      addresses!: builder.array([])
+    });
+     
+   }
+ 
+   ngOnInit() {
+ 
+     this.adressArray = [];
+   }
+ 
+   get nom(){
+     return this.contactForm.get("nom");
+   }
+   get typeAdresse(): any {
+     return this.contactForm.get('address.typeAdresse');
+   }
+   get typeVoie(): any {
+     return this.contactForm.get('address.typeVoie');
+   }
+   get rue(): any {
+     return this.contactForm.get('address.rue');
+   }
+   get numero(): any {
+     return this.contactForm.get('address.numero');
+   }
+   get ville(): any {
+     return this.contactForm.get('address.ville');
+   }
+   get cp(): any {
+     return this.contactForm.get('address.cp');
+   }
+   get pays(): any {
+     return this.contactForm.get('address.pays');
+   }
+   get commentaire(): any {
+     return this.contactForm.get('address.commentaire');
+   }
+   get contactNo(): any {
+     return this.contactForm.get('address.contactNo');
+   }
+ 
+   AddAdresse() {
+     const address = {}
+     this.adressArray.push(address);
+     (this.contactForm.get("addresses") as FormArray).push(
+       this.builder.group({
+         typeAdresse: this.builder.control(""),
+         typeVoie: this.builder.control(""),
+         rue: this.builder.control(""),
+         numero: this.builder.control(""),
+         ville: this.builder.control(""),
+         cp: this.builder.control(""),
+         pays: this.builder.control(""),
+         commentaire: this.builder.control(""),
+         contactNo: this.builder.control("")
+       })
+     )
+   }
+ 
+   getAdresses(){
+     this.adressArray.forEach((adress,i)=>{
+       adress.typeAdresse = this.addresses.at(i).get("typeAdresse")!.value;
+       adress.typeVoie = this.addresses.at(i).get("typeVoie")!.value;
+       adress.rue = this.addresses.at(i).get("rue")!.value;
+       adress.contactNo = this.addresses.at(i).get("contactNo")!.value;
+       adress.cp = this.addresses.at(i).get("cp")!.value;
+       adress.numero = this.addresses.at(i).get("numero")!.value;
+       adress.pays = this.addresses.at(i).get("pays")!.value;
+       adress.ville = this.addresses.at(i).get("ville")!.value;
+       adress.commentaire = this.addresses.at(i).get("commentaire")!.value;
+     })
+     return this.adressArray
+   }
+ 
+   get addresses() {
+     return this.contactForm.get("addresses") as FormArray;
+   }
+   EditContact() {
+     console.log(this.contactForm.get('address.typeAdresse'))
+     let adressesLocal:any[]=[];
+     let data = {
+       nom:this.contactForm.controls.nom.value,
+       prenom:this.contactForm.controls.prenom.value,
+       adresses:this.getAdresses()
+     }
+     for(let ad of this.getAdresses()){
+       console.log(ad)
+       adressesLocal.push(new Adresse(ad.typeAdresse,ad.typeVoie,ad.rue,ad.numero,ad.ville,ad.cp,ad.pays,ad.commentaire,ad.contactNo))
+     }
+     if (this.contactForm.invalid)
+       return
+     let date = this.contactForm.controls.datenaissance.value;
+     date = format(date,"dd/MM/yyyy");
+     let contact: contactApp = new contactApp(
+       this.contactForm.controls.nom.value, this.contactForm.controls.prenom.value,date, adressesLocal, this.contact.id)
+     this.contactService.UpdateContact(contact).subscribe((response) => {
+       this.router.navigate(["/contacts"])
+     })
+ 
+   }
+
+}

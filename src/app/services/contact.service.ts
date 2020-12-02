@@ -26,10 +26,13 @@ export class ContactService {
     return this.http.put('api/contacts', contactApp)
   }
   DeleteContact(id:number){
-    return this.http.delete(`api/contact/?${id}`);
+    return this.http.delete('api/contacts/'+id);
   }
 
-  getContactById(id: number):Observable<contactApp[]>{
-    return this.http.get<contactApp[]>(`api/contact/?${id}`);
+  getContactById(id: number){
+    return this.http.get('api/contacts/'+id).pipe(catchError(err=>{
+      console.log(err)
+      return of(err)
+      }));
   }
 }
