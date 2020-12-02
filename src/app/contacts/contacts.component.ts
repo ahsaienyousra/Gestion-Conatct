@@ -9,7 +9,7 @@ import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css']
+  styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
 
@@ -60,7 +60,7 @@ export class ContactsComponent implements OnInit {
   getSelectedRowData(event?:any) {
     let selectedData=event.data;
     this.dataService.changeData([selectedData])
-
+    console.log(selectedData)
   } 
  
 }

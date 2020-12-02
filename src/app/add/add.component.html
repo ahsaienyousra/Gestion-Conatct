@@ -1,40 +1,54 @@
 <p>add works!</p>
 <form [formGroup]="contactForm">
-  
-    <label>
-      Nom:
-      <input type="text" formControlName="nom">
-    </label>
-  
-    <label>
-      Prenom:
-      <input type="text" formControlName="prenom">
-    </label>
-    <label>
-        date de naissance:
-        <input type="text" formControlName="datenaissance">
-      </label>
-    <div formGroupName="address">
-        <h3>Address</h3>
-<!--       <table>
-        <tr formArrayName="address" 
-        *ngFor="let address of contactForm.get('address')['controls'];
-        let i=index"
-        
-        >
-        <td>
-          <div [formGroupName]="i">
-            <label>
-              typeAdresse:
-            <input type="text" formControlName="typeAdresse">
+  <label>
+    Nom:
+    <input type="text" formControlName="nom" />
+  </label>
+
+  <label>
+    Prenom:
+    <input type="text" formControlName="prenom" />
+  </label>
+  <label>
+    date de naissance:
+    <input type="text" formControlName="datenaissance" />
+  </label>
+  <h3>Address</h3>
+  <table>
+    <tr
+      formArrayName="addresses"
+      *ngFor="
+        let address of contactForm.get('addresses')!['controls'];
+        let i = index
+      "
+    >
+      <td>
+        <div [formGroupName]="i">
+          <label>
+            typeAdresse:
+            <input type="text" formControlName="typeAdresse" />
           </label>
-          </div>
-        </td>
-
-
-        </tr>
-      </table> -->
-        <!-- <label>
+          <label>
+            typeVoie:
+            <input type="text" formControlName="typeVoie" />
+          </label>
+          <label>
+            rue:
+            <input type="text" formControlName="rue" />
+          </label>
+          <label>
+            numero:
+            <input type="text" formControlName="numero" />
+          </label>
+          <label>
+            ville:
+            <input type="text" formControlName="ville" />
+          </label>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <!-- <label>
             typeAdresse:
           <input type="text" formControlName="typeAdresse">
         </label>
@@ -73,7 +87,8 @@
             contactNo:
           <input type="text" formControlName="contactNo">
         </label>-->
-      </div> 
-      <button (click)="AddAdresse()">Add Adresse</button>
-      <button type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">Submit</button>
-  </form>
+  <button (click)="AddAdresse()">Add Adresse</button>
+  <button type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">
+    Submit
+  </button>
+</form>

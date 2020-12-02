@@ -1,0 +1,16 @@
+/* .centreralize {
+
+    display: flex;
+    justify-content: center;
+  }
+#agGrid{
+  justify-content: flex-start;
+     max-width: 600px;
+     width: 100%;} */
+@import "@material/image-list/mdc-image-list";
+
+.contact-list {
+  @include mdc-image-list-standard-columns(4);
+
+  overflow: auto;
+}
