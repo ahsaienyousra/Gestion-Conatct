@@ -15,8 +15,12 @@ export class InMemoryDataService implements InMemoryDbService {
       new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81"),
       new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")
     ],1),
-    new contactApp("AHSAIENE","OMAR","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")],2)
-    
+    new contactApp("AHSAIENE","OMAR","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"LYON",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")],2),
+    new contactApp("CHBAB","Khalid","01/01/1998",[new Adresse("TRAVAIL","RUE","RUE DES ARCHIVES",4,"PARIS",29200,"FRANCE","COMMENTAIRE","+212 6 06 89 31 12")],3),
+    new contactApp("TEST","TEST","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",5,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 66 88 00")],4),
+    new contactApp("MARK","Xavier","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",6,"TANGER",29200,"MAROC","COMMENTAIRE","+33 6 64 86 90 12")],5),
+    new contactApp("Phillipe","SALIOU","06/02/1960",[new Adresse("TRAVAIL","RUE","RUE DES ARCHIVES",5,"ROANNE-LYON",29200,"FRANCE","COMMENTAIRE","+34 6 64 86 90 33")],6),
+
     ];
     return {contacts};
 
