@@ -3,14 +3,28 @@
         <mat-icon>add</mat-icon>
     </button>
 </div>
-
 <button class="btn btn-primary mb-3" (click)="onDeleteRow()">Delete Row</button>
-<ag-grid-angular #agGrid id="agGrid"
-    style="width: 1000px; height: 500px;"
-    class="ag-theme-alpine"
-    [rowData]="contactsList"
-    [columnDefs]="columnDefs"
-    rowSelection="multiple" 
-    (gridReady)="onGridReady($event)"
->
-</ag-grid-angular>
+<button (click)="getSelectedRowData()">Get Selected Contacts</button>
+<div class="centreralize">
+
+</div>
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell"><ag-grid-angular #agGrid id="agGrid"
+        style="width: 600px; height: 450px;" 
+            class="ag-theme-alpine"
+            [rowData]="contactsList"
+            [columnDefs]="columnDefs"
+            rowSelection="multiple"
+            (gridReady)="onGridReady($event)"
+            (rowDoubleClicked)="getSelectedRowData($event)"
+        >
+        </ag-grid-angular>
+    </div>
+      <div class="mdc-layout-grid__cell">
+          <h1>LOOOOl</h1>
+        <app-contact-detail></app-contact-detail>
+      </div>
+      <div class="mdc-layout-grid__cell"></div>
+    </div>
+  </div>

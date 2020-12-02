@@ -1,12 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { contactApp } from './in-memory-data.service';
-
+import { catchError } from 'rxjs/operators';
+const cudOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
+  public mylist : any[] = [];
 
   constructor(private http: HttpClient ) { }
 
@@ -14,7 +17,10 @@ export class ContactService {
     return this.http.get<contactApp[]>('api/contacts')
   }
   AddContact(contactApp: contactApp){
-    return this.http.post('api/contacts', contactApp)
+    return this.http.post('api/contacts', contactApp, cudOptions).pipe(catchError(err=>{
+      console.log(err)
+      return of(err)
+      }))
   }
   UpdateContact(contactApp: contactApp){
     return this.http.put('api/contacts', contactApp)

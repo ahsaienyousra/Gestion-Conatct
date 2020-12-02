@@ -10,29 +10,29 @@ export class InMemoryDataService implements InMemoryDbService {
 
   constructor() { }
   createDb(){
-    const contacts = [
-    new contactApp(1,"AHSAIEN","YOUSRA","13/11/1996", [ 
+    let contacts = [
+    new contactApp("AHSAIEN","YOUSRA","13/11/1996", [ 
       new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81"),
       new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")
-    ]),
-    new contactApp(2,"AHSAIEN","OMAR","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")])
+    ],1),
+    new contactApp("AHSAIENE","OMAR","06/02/2013",[new Adresse("DOMICILE","RUE","RUE DES ARCHIVES",4,"BREST",29200,"FRANCE","COMMENTAIRE","+33 6 64 86 90 81")],2)
     
     ];
     return {contacts};
 
   }
-  genId(contacts: contactApp[]): number {
-    return contacts.length > 0 ? Math.max(...contacts.map(contact => contact.id)) + 1 : 2;
+  genId(contacts: contactApp[]) {
+    return contacts.length > 0 ? Math.max(...contacts.map(contact => contact.id!)) + 1 : 2;
   }
   }
   export class contactApp{
-    id: number
+    id?: number
     nom: string
     prenom: string
     datenaissance:string
     adresse:Adresse[]
 
-    constructor(id: number, nom: string,prenom: string,datenaissance:string,adresse:Adresse[]) { 
+    constructor( nom: string,prenom: string,datenaissance:string,adresse:Adresse[],id?: number) { 
       this.id=id
       this.nom=nom
       this.prenom=prenom

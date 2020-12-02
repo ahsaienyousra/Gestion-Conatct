@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
     MatInputModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

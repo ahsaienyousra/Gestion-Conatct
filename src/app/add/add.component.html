@@ -16,8 +16,25 @@
       </label>
     <div formGroupName="address">
         <h3>Address</h3>
-      
-        <label>
+<!--       <table>
+        <tr formArrayName="address" 
+        *ngFor="let address of contactForm.get('address')['controls'];
+        let i=index"
+        
+        >
+        <td>
+          <div [formGroupName]="i">
+            <label>
+              typeAdresse:
+            <input type="text" formControlName="typeAdresse">
+          </label>
+          </div>
+        </td>
+
+
+        </tr>
+      </table> -->
+        <!-- <label>
             typeAdresse:
           <input type="text" formControlName="typeAdresse">
         </label>
@@ -55,7 +72,8 @@
         <label>
             contactNo:
           <input type="text" formControlName="contactNo">
-        </label>
-      </div>
+        </label>-->
+      </div> 
+      <button (click)="AddAdresse()">Add Adresse</button>
       <button type="submit" [disabled]="!contactForm.valid" (click)="AddContact()">Submit</button>
   </form>
